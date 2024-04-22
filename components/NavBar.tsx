@@ -1,12 +1,33 @@
+import Link from "next/link";
 import React from "react";
+
+const pages = [
+  {
+    title: "Kalorier",
+    path: "/kalorier-per-krone",
+  },
+  {
+    title: "Kg",
+    path: "/kg-per-krone",
+  },
+  {
+    title: "Proteiner",
+    path: "/protein-per-krone",
+  },
+];
 
 export default function NavBar() {
   return (
-    <div className="navbar bg-base-100 rounded-xl">
-      <div className="flex-1">
-        <a className="btn btn-ghost text-xl">Mest for penga</a>
-      </div>
-      <div className="flex-none">
+    <div className="w-full flex justify-between items-center py-1 px-5">
+      <Link href="/" className="btn btn-ghost text-xl">
+        Mest for penga
+      </Link>
+      <div className="flex justify-evenly items-center gap-5">
+        {pages.map((page, i) => (
+          <Link key={i} href={page.path}>
+            {page.title}
+          </Link>
+        ))}
         <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
             <div className="indicator">

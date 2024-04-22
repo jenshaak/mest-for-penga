@@ -29,17 +29,24 @@ export default function FilterBar() {
               <ul className="p-2">
                 <li>
                   <button onClick={() => handleClick("proteinerPerKr")}>
-                    Proteiner per kr
+                    Proteiner/kr
                   </button>
                 </li>
                 <li>
                   <button onClick={() => handleClick("kalorierPerKr")}>
-                    Kalorier per kr
+                    Kalorier/kr
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => handleClick("prosentProteinPerKalori")}
+                  >
+                    Protein/kalori
                   </button>
                 </li>
                 <li>
                   <button onClick={() => handleClick("priser.0.prisPerKg")}>
-                    Kg per kr
+                    Kg/kr
                   </button>
                 </li>
                 <li>
