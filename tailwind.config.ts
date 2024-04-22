@@ -27,7 +27,7 @@ const config: Config = {
         },
       },
       "light",
-      "cupcake",
+      "dark",
     ],
   },
   plugins: [require("daisyui")],

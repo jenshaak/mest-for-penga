@@ -43,7 +43,7 @@ export async function scrapeData(url: string) {
     for (let index = 0; index < buttonCount; index++) {
       // await page.waitForSelector('fieldset>div>div>div', { timeout: timeout });
       // const subCatList = await page.$$('fieldset>div>div>div');
-      if((index < 0) || (index === 8) || (index > 10 && index < 20) || (index === 20)) continue;
+      if((index < 16) || (index > 1 && index < 5) || (index === 8) || (index > 10 && index < 13) || (index === 20)) continue;
       const buttonList = await page.$$('fieldset>div>div>div>button');
       const button = buttonList[index];
       const foundKategori = await page.evaluate(el => el.textContent, button);

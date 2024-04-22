@@ -31,13 +31,15 @@ export default async function ProteinPerKronePage({ searchParams }: Props) {
 
   return (
     <div>
-      <FilterBar />
       <div className="flex">
-        <CategoriesBar categories={kategorier} />
+        <CategoriesBar kategorier={kategorier} />
         <div>
-          <Search placeholder="søk..." />
-          <p>{count} resultater</p>
-          <div className="flex flex-wrap gap-5 overflow-x-hidden justify-center">
+          <div className="flex">
+            <FilterBar />
+            <Search placeholder="søk..." />
+          </div>
+          <p className="text-right mr-5">{count} resultater</p>
+          <div className="flex flex-wrap gap-8 overflow-x-hidden justify-center p-7">
             {varer &&
               varer.map((vare) => <VareCard key={vare._id} vare={vare} />)}
           </div>

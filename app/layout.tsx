@@ -21,15 +21,10 @@ export default async function RootLayout({
   return (
     <Suspense fallback={<Loading />}>
       <html lang="en" suppressHydrationWarning>
-        <body className={`${inter.className}`}>
-          <div className="flex w-full bg-base-200">
-            <div className="w-1/6">
-              <SideBar />
-            </div>
-            <div className="w-5/6 p-3 pl-5 space-y-4">
-              <NavBar />
-              {children}
-            </div>
+        <body className={`${inter.className}`} data-theme="dark">
+          <div className="w-full">
+            <NavBar />
+            {children}
           </div>
         </body>
       </html>
