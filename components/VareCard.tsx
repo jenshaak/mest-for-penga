@@ -5,16 +5,8 @@ import Link from "next/link";
 import React from "react";
 
 export default function VareCard({ vare }: { vare: VareType }) {
-  // const searchParams = useSearchParams();
-  // const { replace } = useRouter();
-  // const pathname = usePathname();
+  const colorPicker = (pro: string, kcal: string, proPerKcal: string) => {};
 
-  // const params = new URLSearchParams(searchParams);
-
-  // const handleClick = (id: string) => {
-  //   params.set("/", id);
-  //   replace(`${pathname}?${params}`);
-  // };
   return (
     <Link
       key={vare._id}
