@@ -6,7 +6,9 @@ import { scrapeData } from "../../utils/scraping/scrapeKassalapp";
 export default function ProduktenhetPerKronePage() {
   const handleSubmit = async () => {
     try {
-      await scrapeData("https://kassal.app/varer?kategori=22");
+      await scrapeData(
+        "https://kassal.app/varer?kategori=ingen&naring[protein][min]=1&sortering=pris_desc"
+      );
     } catch {
       return "Error";
     }
@@ -14,9 +16,9 @@ export default function ProduktenhetPerKronePage() {
 
   return (
     <div>
-      <button onClick={handleSubmit} className="btn btn-primary">
+      {/* <button onClick={handleSubmit} className="btn btn-primary">
         Scrape kassalapp
-      </button>
+      </button> */}
     </div>
   );
 }

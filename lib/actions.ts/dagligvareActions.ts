@@ -17,11 +17,14 @@ export const fetchDagligvare = async (id: string) => {
   }
 }
 
-export const fetchDagligvarer = async (q: string, page: string, sort: string, cat?: string, itemsPerPage: number = 10) => {
+type Filters = Record<string, string>;
+
+export const fetchDagligvarer = async (q: string, page: string, sort: string, cat?: string, itemsPerPage: number = 10, filters?: Filters) => {
   const regex = new RegExp(q, "i"); // Making the search query case insensitive (upper-/lowercase)
   const pageNum = page === "" ? 1 : Number(page);
   const sortBy = sort === "" ? "createdAt" : sort;
-  let query: any;
+  let query: any = { title: { $regex: regex } };
+
   if(cat !== "") {
     query = { 
       title: { $regex: regex },
@@ -30,9 +33,23 @@ export const fetchDagligvarer = async (q: string, page: string, sort: string, ca
         { underKategori: cat }
       ]
     };
-  } else {
-    query = { title: { $regex: regex } }
   }
+
+  console.log(filters);
+
+  if (filters) {
+    Object.keys(filters).forEach(key => {
+      const range = filters[key];
+      if (range) {
+        const [min, max] = range.split("-");
+        console.log("min",min,"max", max)
+        if (!query[key]) query[key] = {};
+        if (min) query[key].$gte = min;
+        if (max) query[key].$lte = max;
+      }
+    });
+  }
+
   try {
     await connectToDb();
     const [ count, varer ] = await Promise.all([

@@ -9,42 +9,73 @@ import { fetchDagligvarer } from "@/lib/actions.ts/dagligvareActions";
 import Search from "@/components/Search";
 import VareCard from "@/components/VareCard";
 import FilterBar from "@/components/FilterBar";
+import VareNavBar from "@/components/VareNavBar";
 
 type Props = {
   params: {};
-  searchParams: {
-    q?: string;
-    page?: string;
-    sort?: string;
-    cat?: string;
-  };
+  searchParams: SearchParams;
 };
 
+type SearchParams = {
+  q?: string;
+  page?: string;
+  sort?: string;
+  cat?: string;
+  proteinerPerKr?: string;
+  kalorierPerKr?: string;
+  prosentProteinPerKalori?: string;
+};
+
+type FilterKeys = keyof SearchParams;
+
 export default async function ProteinPerKronePage({ searchParams }: Props) {
-  const q = searchParams?.q || "";
-  const page = searchParams?.page || "";
-  const sort = searchParams?.sort || "";
-  let cat = searchParams?.cat || "";
-  cat = cat.replace(/\+/g, " ").replace(/%20/g, " ");
-  const { count, varer } = await fetchDagligvarer(q, page, sort, cat, 32);
+  const { q, page, sort, cat } = searchParams;
+  const qu = q || "";
+  const side = page || "";
+  const sortBy = sort || "popularitet";
+  const itemsPerPage = 32;
+  let kat = cat || "";
+
+  const filters: Record<string, string> = {};
+  const filterKeys: FilterKeys[] = [
+    "proteinerPerKr",
+    "kalorierPerKr",
+    "prosentProteinPerKalori",
+  ];
+
+  // Legger kun til de filtrene som brukes
+  filterKeys.forEach((key) => {
+    const value = searchParams[key];
+    if (value) {
+      filters[key] = value;
+    }
+  });
+
+  kat = kat.replace(/\+/g, " ").replace(/%20/g, " ");
+  const { count, varer } = await fetchDagligvarer(
+    qu,
+    side,
+    sortBy,
+    kat,
+    itemsPerPage,
+    filters
+  );
   const kategorier = await fetchKategorier();
 
   return (
-    <div>
-      <div className="flex">
-        <CategoriesBar kategorier={kategorier} />
-        <div>
-          <div className="flex">
-            <FilterBar />
-            <Search placeholder="søk..." />
-          </div>
-          <p className="text-right mr-5">{count} resultater</p>
-          <div className="flex flex-wrap gap-8 overflow-x-hidden justify-center p-7">
-            {varer &&
-              varer.map((vare) => <VareCard key={vare._id} vare={vare} />)}
-          </div>
-          <Pagination count={count} />
+    <div className="flex w-full">
+      <CategoriesBar kategorier={kategorier} currentCat={kat} />
+      <div className="w-full">
+        <div className="flex">
+          <VareNavBar />
         </div>
+        <p className="text-right mr-5">{count} resultater</p>
+        <div className="flex flex-wrap gap-8 overflow-x-hidden justify-center p-7">
+          {varer &&
+            varer.map((vare) => <VareCard key={vare._id} vare={vare} />)}
+          {count === 0 && <h3>Ingen resultater</h3>}
+        </div>
+        <Pagination count={count} />
       </div>
     </div>
   );

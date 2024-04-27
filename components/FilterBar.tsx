@@ -10,65 +10,127 @@ export default function FilterBar() {
   const pathname = usePathname();
 
   const params = new URLSearchParams(searchParams);
+  const handleDelete = () => {
+    params.delete("proteinerPerKr");
+    params.delete("kalorierPerKr");
+    params.delete("prosentProteinPerKalori");
+    replace(`${pathname}?${params}`);
+  };
 
-  const handleClick = (cat: string) => {
-    params.set("sort", cat);
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    params.delete("page");
+    const formData = new FormData(e.currentTarget);
+    const {
+      proteinerPerKrMin,
+      proteinerPerKrMax,
+      kalorierPerKrMin,
+      kalorierPerKrMax,
+      prosentProteinPerKaloriMin,
+      prosentProteinPerKaloriMax,
+    } = Object.fromEntries(formData);
+
+    // Legger til filtre i URL
+    if (proteinerPerKrMin || proteinerPerKrMax) {
+      params.set("proteinerPerKr", `${proteinerPerKrMin}-${proteinerPerKrMax}`);
+    } else params.delete("proteinerPerKr");
+    if (kalorierPerKrMax || kalorierPerKrMin) {
+      params.set("kalorierPerKr", `${kalorierPerKrMin}-${kalorierPerKrMax}`);
+    } else params.delete("kalorierPerKr");
+    if (prosentProteinPerKaloriMax || prosentProteinPerKaloriMin) {
+      params.set(
+        "prosentProteinPerKalori",
+        `${prosentProteinPerKaloriMin}-${prosentProteinPerKaloriMax}`
+      );
+    } else params.delete("prosentProteinPerKalori");
+
     replace(`${pathname}?${params}`);
   };
 
   return (
-    <div className="navbar bg-base-100 flex justify-center">
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
+    <li>
+      <details>
+        <summary>Filter</summary>
+        <ul className="p-2">
           <li>
-            <a>Item 1</a>
-          </li>
-          <li>
-            <details>
-              <summary>Sort by</summary>
-              <ul className="p-2">
-                <li>
-                  <button onClick={() => handleClick("proteinerPerKr")}>
-                    Proteiner/kr
-                  </button>
-                </li>
-                <li>
-                  <button onClick={() => handleClick("kalorierPerKr")}>
-                    Kalorier/kr
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => handleClick("prosentProteinPerKalori")}
-                  >
-                    Protein/kalori
-                  </button>
-                </li>
-                <li>
-                  <button onClick={() => handleClick("priser.0.prisPerKg")}>
-                    Kg/kr
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => handleClick("næringsinnhold.kalorier")}
-                  >
-                    Kalorier
-                  </button>
-                </li>
-                <li>
-                  <button onClick={() => handleClick("næringsinnhold.protein")}>
-                    protein
-                  </button>
-                </li>
-              </ul>
-            </details>
-          </li>
-          <li>
-            <a>Item 3</a>
+            <form
+              onSubmit={(e) => handleSubmit(e)}
+              className="flex flex-col justify-left"
+            >
+              {filterTyper.map((type, i) => (
+                <React.Fragment key={i}>
+                  <p className="text-xs">{type.title}</p>
+                  <div className="flex gap-2">
+                    <input
+                      type="number"
+                      className="p-[10px] rounded-lg w-20 border border-primary focus:ring-1 focus:ring-offset-1 focus:ring-primary focus:outline-none"
+                      placeholder="min"
+                      name={`${type.objectKey}Min`}
+                    />
+                    <input
+                      type="number"
+                      className="p-[10px] rounded-lg w-20 border border-primary focus:ring-1 focus:ring-offset-1 focus:ring-primary focus:outline-none"
+                      placeholder="max"
+                      name={`${type.objectKey}Max`}
+                    />
+                  </div>
+                </React.Fragment>
+              ))}
+              <div className="flex gap-5 mt-5">
+                <button
+                  type="button"
+                  className="btn btn-sm btn-error"
+                  onClick={handleDelete}
+                >
+                  Tøm
+                </button>
+                <button className="btn btn-sm btn-primary" type="submit">
+                  Bruk
+                </button>
+              </div>
+            </form>
           </li>
         </ul>
-      </div>
-    </div>
+      </details>
+    </li>
   );
 }
+
+const filterTyper = [
+  {
+    title: "Protein/kr",
+    objectKey: "proteinerPerKr",
+  },
+  {
+    title: "Kalorier/kr",
+    objectKey: "kalorierPerKr",
+  },
+  {
+    title: "Protein/kcal",
+    objectKey: "prosentProteinPerKalori",
+  },
+  // {
+  //   title: "Protein/kcal",
+  //   objectKey: "prosentProteinPerKalori",
+  // },
+  // {
+  //   title: "Protein/kcal",
+  //   objectKey: "prosentProteinPerKalori",
+  // },
+  // {
+  //   title: "Protein/kcal",
+  //   objectKey: "prosentProteinPerKalori",
+  // },
+  // {
+  //   title: "Protein/kcal",
+  //   objectKey: "prosentProteinPerKalori",
+  // },
+  // {
+  //   title: "Protein/kcal",
+  //   objectKey: "prosentProteinPerKalori",
+  // },
+  // {
+  //   title: "Protein/kcal",
+  //   objectKey: "prosentProteinPerKalori",
+  // },
+];
