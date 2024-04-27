@@ -5,6 +5,7 @@ import React from "react";
 
 type Props = {
   count: number;
+  // itemsPerPage: number;
 };
 
 function Pagination({ count }: Props) {
@@ -12,14 +13,15 @@ function Pagination({ count }: Props) {
   const { replace } = useRouter();
   const pathname = usePathname();
 
+  const itemsPerPage = 32;
+
   const page = searchParams.get("page") || "1";
+  const numberOfPages = Math.ceil(count / itemsPerPage);
 
   const params = new URLSearchParams(searchParams);
-  const ITEMS_PER_PAGE = 2;
 
-  const hasPrev = ITEMS_PER_PAGE * (parseInt(page) - 1) > 0;
-  const hasNext =
-    ITEMS_PER_PAGE * (parseInt(page) - 1) + ITEMS_PER_PAGE < count;
+  const hasPrev = itemsPerPage * (parseInt(page) - 1) > 0;
+  const hasNext = itemsPerPage * (parseInt(page) - 1) + itemsPerPage < count;
 
   const handleChangePage = (type: string) => {
     type === "prev"
@@ -37,6 +39,10 @@ function Pagination({ count }: Props) {
       >
         Previous
       </button>
+      <div className="flex items-center gap-1 dark:text-white">
+        <div className="bg-primary p-3 py-2 rounded-lg m-auto">{page}</div>
+        of {numberOfPages}
+      </div>
       <button
         className="btn btn-primary"
         disabled={!hasNext}

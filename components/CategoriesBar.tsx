@@ -4,11 +4,12 @@ import React, { useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { KategoriType } from "@/typings";
 
-export default function CategoriesBar({
-  kategorier,
-}: {
+type Props = {
   kategorier: KategoriType[];
-}) {
+  currentCat: string;
+};
+
+export default function CategoriesBar({ kategorier, currentCat }: Props) {
   const [openCat, setOpenCat] = useState("");
   const [subCat, setSubCat] = useState("");
   const searchParams = useSearchParams();
@@ -21,6 +22,7 @@ export default function CategoriesBar({
     setOpenCat("");
     params.delete("cat");
     params.delete("q");
+    params.delete("page");
     replace(`${pathname}?${params}`);
   };
 
@@ -30,6 +32,7 @@ export default function CategoriesBar({
       setSubCat("");
     } else setSubCat(cat);
     params.delete("q");
+    params.delete("page");
     params.set("cat", cat);
     replace(`${pathname}?${params}`);
   };
@@ -41,7 +44,7 @@ export default function CategoriesBar({
         <li onClick={() => handleAlle()}>
           <div
             className={`${
-              openCat === "" && "text-black dark:text-white"
+              currentCat === "" && "text-primary"
             } cursor-pointer hover:bg-base-300 p-2 rounded-lg`}
           >
             Alle kategorier
@@ -52,7 +55,8 @@ export default function CategoriesBar({
             <div
               onClick={() => handleClick(kat.title!)}
               className={`${
-                openCat === kat.title && "text-black dark:text-white"
+                (currentCat === kat.title || openCat === kat.title) &&
+                "text-primary"
               } cursor-pointer hover:bg-base-300 p-2 rounded-lg`}
             >
               {kat.title}
@@ -64,7 +68,7 @@ export default function CategoriesBar({
                     <div
                       onClick={() => handleClick(underKat, true)}
                       className={`${
-                        subCat === underKat && "text-black dark:text-white"
+                        currentCat === underKat && "text-primary"
                       } cursor-pointer hover:bg-base-300 p-2 rounded-lg`}
                     >
                       {underKat}

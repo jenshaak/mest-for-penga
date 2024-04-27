@@ -19,15 +19,13 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <Suspense fallback={<Loading />}>
-      <html lang="en" suppressHydrationWarning>
-        <body className={`${inter.className}`} data-theme="dark">
-          <div className="w-full">
-            <NavBar />
-            {children}
-          </div>
-        </body>
-      </html>
-    </Suspense>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${inter.className}`} data-theme="dark">
+        <div className="w-full">
+          <NavBar />
+          {children}
+        </div>
+      </body>
+    </html>
   );
 }

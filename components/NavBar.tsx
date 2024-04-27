@@ -18,11 +18,9 @@ const pages = [
 
 export default function NavBar() {
   return (
-    <div className="w-full flex justify-between items-center py-1 px-5">
-      <Link href="/" className="btn btn-ghost text-xl">
-        Mest for penga
-      </Link>
-      <div className="flex justify-evenly items-center gap-5">
+    <div className="w-full flex justify-center items-center py-5 px-5">
+      <h3>Mest for Penga</h3>
+      {/* <div className="flex justify-evenly items-center gap-5">
         {pages.map((page, i) => (
           <Link key={i} href={page.path}>
             {page.title}
@@ -92,7 +90,7 @@ export default function NavBar() {
             </li>
           </ul>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
