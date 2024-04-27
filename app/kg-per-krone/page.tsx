@@ -16,9 +16,9 @@ export default function ProduktenhetPerKronePage() {
 
   return (
     <div>
-      {/* <button onClick={handleSubmit} className="btn btn-primary">
+      <button onClick={handleSubmit} className="btn btn-primary">
         Scrape kassalapp
-      </button> */}
+      </button>
     </div>
   );
 }

@@ -14,14 +14,14 @@ export default function KalorierPerKronePage() {
   };
 
   const colorPickers = Array.from({ length: 30 }, (_, i) => (
-    <ColorPicker kcal={i} />
+    <ColorPicker key={i} kcal={i} />
   ));
   return (
     <div>
-      {/* <button onClick={handleSubmit} className="btn btn-primary">
+      <button onClick={handleSubmit} className="btn btn-primary">
         Scrape Tights
       </button>
-      {colorPickers} */}
+      {colorPickers}
     </div>
   );
 }
