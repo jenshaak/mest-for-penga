@@ -1,5 +1,5 @@
 import { KategoriType, Pris, VareType } from "@/typings";
-import React from "react";
+import React, { Suspense } from "react";
 import Image from "next/image";
 import { imageMap } from "@/utils/imageUrls";
 import Pagination from "@/components/Pagination";
@@ -10,6 +10,7 @@ import Search from "@/components/Search";
 import VareCard from "@/components/VareCard";
 import FilterBar from "@/components/FilterBar";
 import VareNavBar from "@/components/VareNavBar";
+import Varer from "@/components/Varer";
 
 type Props = {
   params: {};
@@ -69,13 +70,14 @@ export default async function ProteinPerKronePage({ searchParams }: Props) {
         <div className="flex">
           <VareNavBar />
         </div>
-        <p className="text-right mr-5">{count} resultater</p>
+        <Varer searchParams={searchParams} />
+        {/* <p className="text-right mr-5">{count} resultater</p>
         <div className="flex flex-wrap gap-8 overflow-x-hidden justify-center p-7">
           {varer &&
             varer.map((vare) => <VareCard key={vare._id} vare={vare} />)}
           {count === 0 && <h3>Ingen resultater</h3>}
         </div>
-        <Pagination count={count} />
+        <Pagination count={count} /> */}
       </div>
     </div>
   );
