@@ -23,7 +23,7 @@ export default async function RootLayout({
       <body className={`${inter.className}`} data-theme="dark">
         <div className="w-full">
           <NavBar />
-          {children}
+          <Suspense fallback={<Loading />}>{children}</Suspense>
         </div>
       </body>
     </html>
