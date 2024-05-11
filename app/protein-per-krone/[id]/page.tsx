@@ -13,8 +13,8 @@ type Props = {
     id: string;
   };
 };
-export default async function ProductPage({ params }: Props) {
-  const { id } = params;
+
+async function getVarer(id: string){
   const vare: VareType = await fetchDagligvare(id);
   let { varer } = await fetchDagligvarer(
     "",
@@ -23,6 +23,12 @@ export default async function ProductPage({ params }: Props) {
     vare.underKategori,
     8
   );
+  return { vare, varer }
+}
+
+export default async function ProductPage({ params }: Props) {
+  const { vare, varer } = await getVarer(params.id);
+  
   return (
     <div className="flex flex-col items-center w-full">
       <h2 className="mb-7 text-center">{vare.title}</h2>
@@ -163,3 +169,4 @@ export default async function ProductPage({ params }: Props) {
     </div>
   );
 }
+
