@@ -6,6 +6,17 @@ import Dagligvare from "../models/dagligvare"
 import { VareType } from "@/typings";
 import { Query } from "mongoose";
 
+export const fetchVareIds = async () => {
+  try {
+    await connectToDb();
+    const ids = await Dagligvare.find({}, '_id').lean();
+    return ids.map(doc => (doc as any)._id.toString()); 
+  } catch(err) {
+    console.error("Failed to fetch IDs:", err);
+    return []; 
+  }
+}
+
 export const fetchDagligvare = async (id: string) => {
   try {
     await connectToDb();

@@ -2,6 +2,7 @@ import VareCard from "@/components/VareCard";
 import {
   fetchDagligvare,
   fetchDagligvarer,
+  fetchVareIds,
 } from "@/lib/actions.ts/dagligvareActions";
 import { VareType } from "@/typings";
 import { imageMap, plachehodlerPic } from "@/utils/imageUrls";
@@ -14,7 +15,16 @@ type Props = {
   };
 };
 
-async function getVarer(id: string){
+export const dynamicParams = true;
+
+export async function generateStaticParams() {
+  const ids = await fetchVareIds();
+  return ids.map((id) => ({
+    id,
+  }));
+}
+
+async function getVarer(id: string) {
   const vare: VareType = await fetchDagligvare(id);
   let { varer } = await fetchDagligvarer(
     "",
@@ -23,12 +33,12 @@ async function getVarer(id: string){
     vare.underKategori,
     8
   );
-  return { vare, varer }
+  return { vare, varer };
 }
 
 export default async function ProductPage({ params }: Props) {
   const { vare, varer } = await getVarer(params.id);
-  
+
   return (
     <div className="flex flex-col items-center w-full">
       <h2 className="mb-7 text-center">{vare.title}</h2>
@@ -169,4 +179,3 @@ export default async function ProductPage({ params }: Props) {
     </div>
   );
 }
-
