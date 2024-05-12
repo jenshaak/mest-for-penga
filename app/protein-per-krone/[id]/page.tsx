@@ -20,8 +20,8 @@ export const dynamicParams = true;
 export async function generateStaticParams() {
   const ids = await fetchVareIds();
   console.log(ids.slice(1, 5));
-  return ids.map((id) => ({
-    params: { id },
+  return ids.map((item) => ({
+    id: item,
   }));
 }
 
