@@ -1,10 +1,8 @@
 "use server"
 
-import { NextResponse } from "next/server";
 import { connectToDb } from "../connection";
 import Dagligvare from "../models/dagligvare"
 import { VareType } from "@/typings";
-import { Query } from "mongoose";
 
 export const fetchVareIds = async () => {
   try {

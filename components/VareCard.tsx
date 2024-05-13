@@ -10,7 +10,7 @@ export default function VareCard({ vare }: { vare: VareType }) {
       <Link
         key={vare._id}
         className="bg-base-300 rounded-xl w-80 h-96 flex flex-col items-center cursor-pointer mb-4"
-        href={`/protein-per-krone/${vare._id}`}
+        href={`/${vare._id}`}
       >
         <div className="h-1/2 flex items-center justify-center bg-white w-full rounded-t-xl">
           <Image
