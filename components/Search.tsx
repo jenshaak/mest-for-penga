@@ -14,7 +14,7 @@ function Search({ placeholder }: { placeholder: string }) {
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const params = new URLSearchParams(searchParams);
 
-      params.set("page", "1"); // Pagination back to first page
+      params.delete("page"); // Pagination back to first page
 
       if (e.target.value) {
         e.target.value.length > 2 && params.set("q", e.target.value); // Om søket er mer enn 2 bokstaver

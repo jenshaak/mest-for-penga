@@ -67,7 +67,7 @@ export const fetchDagligvarer = async (q: string, page: string, sort: string, ca
         .limit(itemsPerPage)
         .skip(itemsPerPage * (pageNum - 1))
         // .lean()
-        .sort({[sortBy]: sortBy === 'createdAt' ? 1 : -1})
+        .sort({[sortBy]: sortBy === 'popularitet' ? 1 : -1})
     ]);
     return { count, varer };
   } catch (err) {
