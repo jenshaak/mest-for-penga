@@ -60,8 +60,8 @@ export default async function Home({ searchParams }: Props) {
 
   return (
     <div className="flex w-full">
-      <h1>Hello world!</h1>
-      <CategoriesBar kategorier={kategorier} currentCat={kat} />
+      <h1>Hello World!</h1>
+      {/* <CategoriesBar kategorier={kategorier} currentCat={kat} /> */}
       <div className="w-full">
         <div className="flex">
           <VareNavBar />
