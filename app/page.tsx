@@ -48,15 +48,15 @@ export default async function Home({ searchParams }: Props) {
   });
 
   kat = kat.replace(/\+/g, " ").replace(/%20/g, " ");
-  const { count, varer } = await fetchDagligvarer(
-    qu,
-    side,
-    sortBy,
-    kat,
-    itemsPerPage,
-    filters
-  );
-  const kategorier = await fetchKategorier();
+  // const { count, varer } = await fetchDagligvarer(
+  //   qu,
+  //   side,
+  //   sortBy,
+  //   kat,
+  //   itemsPerPage,
+  //   filters
+  // );
+  // const kategorier = await fetchKategorier();
 
   return (
     <div className="flex w-full">
@@ -67,13 +67,13 @@ export default async function Home({ searchParams }: Props) {
           <VareNavBar />
         </div>
         {/* <Varer searchParams={searchParams} /> */}
-        <p className="text-right mr-5">{count} resultater</p>
+        {/* <p className="text-right mr-5">{count} resultater</p>
         <div className="flex flex-wrap gap-8 overflow-x-hidden justify-center p-7">
           {varer &&
             varer.map((vare) => <VareCard key={vare._id} vare={vare} />)}
           {count === 0 && <h3>Ingen resultater</h3>}
         </div>
-        <Pagination count={count} />
+        <Pagination count={count} /> */}
       </div>
     </div>
   );
