@@ -64,7 +64,7 @@ export default async function Home({ searchParams }: Props) {
         <div className="flex">
           <VareNavBar />
         </div>
-        <Varer searchParams={searchParams} />
+        {/* <Varer searchParams={searchParams} /> */}
         {/* <p className="text-right mr-5">{count} resultater</p>
         <div className="flex flex-wrap gap-8 overflow-x-hidden justify-center p-7">
           {varer &&
