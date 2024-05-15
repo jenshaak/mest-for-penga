@@ -4,6 +4,8 @@ import CategoriesBar from "@/components/CategoriesBar";
 import { fetchDagligvarer } from "@/lib/actions.ts/dagligvareActions";
 import VareNavBar from "@/components/VareNavBar";
 import Varer from "@/components/Varer";
+import VareCard from "@/components/VareCard";
+import Pagination from "@/components/Pagination";
 
 type Props = {
   params: {};
@@ -65,13 +67,13 @@ export default async function Home({ searchParams }: Props) {
           <VareNavBar />
         </div>
         {/* <Varer searchParams={searchParams} /> */}
-        {/* <p className="text-right mr-5">{count} resultater</p>
+        <p className="text-right mr-5">{count} resultater</p>
         <div className="flex flex-wrap gap-8 overflow-x-hidden justify-center p-7">
           {varer &&
             varer.map((vare) => <VareCard key={vare._id} vare={vare} />)}
           {count === 0 && <h3>Ingen resultater</h3>}
         </div>
-        <Pagination count={count} /> */}
+        <Pagination count={count} />
       </div>
     </div>
   );
