@@ -29,6 +29,7 @@ export const fetchDagligvare = async (id: string) => {
 type Filters = Record<string, string>;
 
 export const fetchDagligvarer = async (q: string, page: string, sort: string, cat?: string, itemsPerPage: number = 10, filters?: Filters) => {
+  console.log("Fetching dagligvarer")
   const regex = new RegExp(q, "i"); // Making the search query case insensitive (upper-/lowercase)
   const pageNum = page === "" ? 1 : Number(page);
   const sortBy = sort === "" ? "createdAt" : sort;
@@ -61,6 +62,7 @@ export const fetchDagligvarer = async (q: string, page: string, sort: string, ca
 
   try {
     await connectToDb();
+    console.log("CONNECTED");
     const [ count, varer ] = await Promise.all([
       Dagligvare.countDocuments(query),
       Dagligvare.find(query)
@@ -71,7 +73,7 @@ export const fetchDagligvarer = async (q: string, page: string, sort: string, ca
     ]);
     return { count, varer };
   } catch (err) {
-    console.log(err);
+    console.log("Error when fetching", err);
     throw new Error("Failed to fetch dagligvarer!");
   }
 };

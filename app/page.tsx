@@ -48,20 +48,20 @@ export default async function Home({ searchParams }: Props) {
   });
 
   kat = kat.replace(/\+/g, " ").replace(/%20/g, " ");
-  // const { count, varer } = await fetchDagligvarer(
-  //   qu,
-  //   side,
-  //   sortBy,
-  //   kat,
-  //   itemsPerPage,
-  //   filters
-  // );
-  // const kategorier = await fetchKategorier();
+  const { count, varer } = await fetchDagligvarer(
+    qu,
+    side,
+    sortBy,
+    kat,
+    itemsPerPage,
+    filters
+  );
+  const kategorier = await fetchKategorier();
 
   return (
     <div className="flex w-full">
       <h1>Hello World!</h1>
-      {/* <CategoriesBar kategorier={kategorier} currentCat={kat} /> */}
+      <CategoriesBar kategorier={kategorier} currentCat={kat} />
       <div className="w-full">
         <div className="flex">
           <VareNavBar />
