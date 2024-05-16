@@ -45,8 +45,6 @@ export const fetchDagligvarer = async (q: string, page: string, sort: string, ca
     };
   }
 
-  console.log(filters);
-
   if (filters) {
     Object.keys(filters).forEach(key => {
       const range = filters[key];
@@ -61,6 +59,7 @@ export const fetchDagligvarer = async (q: string, page: string, sort: string, ca
   }
 
   try {
+    console.log("TRY")
     await connectToDb();
     console.log("CONNECTED");
     const [ count, varer ] = await Promise.all([
