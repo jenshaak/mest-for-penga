@@ -9,7 +9,7 @@ export default function VareCard({ vare }: { vare: VareType }) {
     <>
       <Link
         key={vare._id}
-        className="bg-base-300 rounded-xl w-80 h-96 flex flex-col items-center cursor-pointer mb-4"
+        className="bg-base-300 rounded-xl w-80 h-96 flex flex-col items-center cursor-pointer mb-4 focus:ring-2 hover:ring-1"
         href={`/${vare._id}`}
       >
         <div className="h-1/2 flex items-center justify-center bg-white w-full rounded-t-xl">

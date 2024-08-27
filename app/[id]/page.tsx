@@ -43,7 +43,7 @@ export default async function ProductPage({ params }: Props) {
 
   return (
     <div className="flex flex-col items-center w-full">
-      <h2 className="mb-7 text-center">{vare.title}</h2>
+      <h2 className="my-10 text-center">{vare.title}</h2>
       <div className="bg-base-300 rounded-xl flex flex-col gap-5 w-11/12 lg:justify-center lg:items-stretch items-center">
         <div className="flex lg:flex-row flex-col w-full lg:items-stretch items-center">
           <div className="flex items-center justify-center h-[400px] w-4/5 lg:w-7/12 bg-white rounded-xl">
@@ -52,7 +52,7 @@ export default async function ProductPage({ params }: Props) {
               alt={`${vare._id || "produkt-bilde"}`}
               width={300}
               height={300}
-              className="object-fit w-auto max-h-full rounded-xl"
+              className="object-fit w-auto max-h-full"
             />
           </div>
           <div className="p-4 w-4/5 lg:w-5/12 flex flex-col items-center">
@@ -84,8 +84,8 @@ export default async function ProductPage({ params }: Props) {
             </table>
           </div>
         </div>
-        <div className="flex lg:flex-row flex-col w-full lg:items-stretch items-center">
-          <div className="p-4 w-4/5 lg:w-fit flex flex-col items-center">
+        <div className="flex lg:flex-row flex-col w-full lg:justify-evenly justify-center">
+          <div className="p-4 w-full lg:w-fit flex flex-col items-center">
             <h4 className="mb-4">Generell info</h4>
             <table className="space-y-2">
               <tbody>
@@ -128,7 +128,7 @@ export default async function ProductPage({ params }: Props) {
             </table>
           </div>
           {vare.priser && vare.priser.length > 0 && (
-            <div className="flex flex-col gap-2 p-4 w-4/5 lg:w-fit items-center">
+            <div className="flex flex-col gap-2 p-4 w-full lg:w-fit items-center">
               <h4>Priser</h4>
               {vare.priser?.map((pris, i) => (
                 <a
@@ -143,7 +143,7 @@ export default async function ProductPage({ params }: Props) {
                       alt={pris.butikk || "butikk"}
                       width={200}
                       height={200}
-                      className="max-w-[25%] h-auto rounded-lg"
+                      className="max-w-[25%] h-auto rounded-lg hover:ring focus:ring-2"
                     />
                   ) : (
                     <p className="mt-auto max-w-full text-lg">{pris.butikk}</p>

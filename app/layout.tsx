@@ -22,7 +22,7 @@ export default async function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className}`} data-theme="dark">
         <div className="w-full">
-          <NavBar />
+          {/* <NavBar /> */}
           <Suspense fallback={<Loading />}>{children}</Suspense>
         </div>
       </body>

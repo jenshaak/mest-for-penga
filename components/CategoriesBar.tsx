@@ -38,7 +38,7 @@ export default function CategoriesBar({ kategorier, currentCat }: Props) {
   };
 
   return (
-    <div className="px-5">
+    <div className="px-8 pt-24 border-base-300 border-r-2">
       <h4>Kategorier</h4>
       <ul className="mt-3">
         <li onClick={() => handleAlle()}>
